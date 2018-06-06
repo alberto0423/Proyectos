@@ -21,7 +21,7 @@ import static logica.ManejoArchivos.*;
 public class Inventario extends javax.swing.JFrame {
 
     private List<Object> lista = new ArrayList();
-    private static final String NOMBRE_ARCHIVO = "C:\\Users\\Crack-ALS\\Documents\\NetBeansProjects\\Punto de venta\\archivo.txt";
+    private static final String NOMBRE_ARCHIVO = "C:\\Users\\Crack-ALS\\Documents\\GitHub\\Proyectos\\Punto de venta\\Archivos\\archivo.txt";
 
     /**
      * Creates new form Inventario
@@ -46,7 +46,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        Tabla = new javax.swing.JTable();
+        tablaProductos = new javax.swing.JTable();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -69,7 +69,7 @@ public class Inventario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(204, 204, 204));
 
-        Tabla.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProductos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -77,7 +77,7 @@ public class Inventario extends javax.swing.JFrame {
                 "No. de piezas", "Producto", "Precio", "Existencia"
             }
         ));
-        jScrollPane1.setViewportView(Tabla);
+        jScrollPane1.setViewportView(tablaProductos);
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 12)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -273,7 +273,7 @@ public class Inventario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -286,9 +286,9 @@ public class Inventario extends javax.swing.JFrame {
         FileNameExtensionFilter filtro = new FileNameExtensionFilter("txt", ".txt");
         jfc.setFileFilter(filtro);
         int r = jfc.showOpenDialog(null);
-
         jfc.showOpenDialog(null);
-
+        leerArchivo(NOMBRE_ARCHIVO);
+          
 
     }//GEN-LAST:event_CargarActionPerformed
 
@@ -319,13 +319,13 @@ public class Inventario extends javax.swing.JFrame {
 //                ex.printStackTrace();
 //            }
 //        }
-            escribirArchivo(NOMBRE_ARCHIVO);
+                escribirArchivo(NOMBRE_ARCHIVO);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
 
-        DefaultTableModel model = (DefaultTableModel) Tabla.getModel();
-        int a = Tabla.getSelectedRow();
+        DefaultTableModel model = (DefaultTableModel) tablaProductos.getModel();
+        int a = tablaProductos.getSelectedRow();
         if (a < 0) {
             JOptionPane.showMessageDialog(null, " Debe seleccionar una fila de la tabla ");
         } else {
@@ -343,7 +343,7 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_EliminarActionPerformed
 
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
-        DefaultTableModel modelo = (DefaultTableModel) Tabla.getModel();
+        DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
 
         Object[] fila = new Object[4];
 
@@ -351,9 +351,10 @@ public class Inventario extends javax.swing.JFrame {
         fila[1] = textProducto.getText();
         fila[2] = textPrecio.getText();
         fila[3] = textExistencia.getText();
+        
         modelo.addRow(fila);
-
-        Tabla.setModel(modelo);
+        tablaProductos.setModel(modelo);
+        limpiar();
 
     }//GEN-LAST:event_AgregarActionPerformed
 
@@ -374,7 +375,7 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_textPiezasActionPerformed
 
     private void jLabel5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel5MouseClicked
-        Proceso proceso =   new Proceso();
+        Proceso proceso = new Proceso();
         proceso.setVisible(true);
         dispose();
     }//GEN-LAST:event_jLabel5MouseClicked
@@ -417,12 +418,11 @@ public class Inventario extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton Agregar;
     private javax.swing.JTextField Buscar;
-    private javax.swing.JButton Cargar;
+    public static javax.swing.JButton Cargar;
     private javax.swing.JButton Eliminar;
     private javax.swing.JButton Guardar;
     private javax.swing.JButton Limpiar;
     private javax.swing.JButton Modificar;
-    private javax.swing.JTable Tabla;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -431,9 +431,10 @@ public class Inventario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    public javax.swing.JTextField textExistencia;
+    public static javax.swing.JTable tablaProductos;
+    public static javax.swing.JTextField textExistencia;
     public static javax.swing.JTextField textPiezas;
-    public javax.swing.JTextField textPrecio;
-    public javax.swing.JTextField textProducto;
+    public static javax.swing.JTextField textPrecio;
+    public static javax.swing.JTextField textProducto;
     // End of variables declaration//GEN-END:variables
 }
