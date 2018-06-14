@@ -169,8 +169,7 @@ public class Proceso extends javax.swing.JFrame {
     private void atrasMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_atrasMouseClicked
         Registro    registro    =   new Registro();
         registro.setVisible(true);
-        registro.dispose();
- 
+        dispose();
     }//GEN-LAST:event_atrasMouseClicked
 
     /**

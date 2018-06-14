@@ -7,9 +7,12 @@ package acceso.login;
 
 import com.sun.scenario.effect.impl.prism.PrCropPeer;
 import inventario.Inventario;
+import java.awt.Font;
+import java.awt.GraphicsEnvironment;
 import javax.swing.JOptionPane;
 
 import java.sql.*;
+import java.util.Locale;
 import proceso.Proceso;
 
 /**
@@ -17,6 +20,10 @@ import proceso.Proceso;
  * @author crack-als
  */
 public class Registro extends javax.swing.JFrame {
+    private String mensaje  =   " Imprenta Digital Rodriguez S.A de S.V \n\n" + "  desarrollado por \n " + "   \n JL Systems";
+    private  String[] fontNames =   GraphicsEnvironment.getLocalGraphicsEnvironment().getAvailableFontFamilyNames();
+    private Font    fuente    =   new   Font(mensaje,Font.PLAIN, 20);
+    
 
     /**
      * Creates new form Registro
@@ -210,18 +217,20 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_ContraseñaActionPerformed
 
     private void SiguienteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SiguienteActionPerformed
-     proceso.Proceso    proceso =   new Proceso();
-     proceso.setVisible(true);
-     dispose();
+        proceso.Proceso proceso = new Proceso();
+        proceso.setVisible(true);
+        dispose();
     }//GEN-LAST:event_SiguienteActionPerformed
 
     private void SalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SalirActionPerformed
-
-        System.exit(0);
+        int verificar = JOptionPane.showConfirmDialog(null, "Desea salir del programa?", "Salir", JOptionPane.OK_OPTION);
+        if (verificar == JOptionPane.OK_OPTION) {
+            System.exit(0);
+        }
     }//GEN-LAST:event_SalirActionPerformed
 
     private void NuevoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_NuevoActionPerformed
-        NuevoUsuario    nuevoUsuario    =   new NuevoUsuario();
+        NuevoUsuario nuevoUsuario = new NuevoUsuario();
         nuevoUsuario.setVisible(true);
         dispose();
     }//GEN-LAST:event_NuevoActionPerformed
@@ -232,17 +241,14 @@ public class Registro extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenu3KeyPressed
 
     private void AcercaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AcercaActionPerformed
-
-        JOptionPane.showMessageDialog(null, " Imprenta Digital Rodriguez S.A de S.V \n\n"
-                + "  desarrollado por \n "
-                + "   \n JL Systems");
+        JOptionPane.showMessageDialog(null, fuente);
 
     }//GEN-LAST:event_AcercaActionPerformed
 
     private void RecuperarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_RecuperarActionPerformed
-      NuevaContraseña   nuevaContraseña =   new NuevaContraseña();
-      nuevaContraseña.setVisible(true);
-      dispose();
+        NuevaContraseña nuevaContraseña = new NuevaContraseña();
+        nuevaContraseña.setVisible(true);
+        dispose();
     }//GEN-LAST:event_RecuperarActionPerformed
 
     /**

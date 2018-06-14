@@ -7,6 +7,7 @@ package inventario;
 
 import java.io.*;
 import java.util.*;
+import java.util.function.ObjDoubleConsumer;
 import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -21,7 +22,8 @@ import static logica.ManejoArchivos.*;
 public class Inventario extends javax.swing.JFrame {
 
     private List<Object> lista = new ArrayList();
-    private static final String NOMBRE_ARCHIVO = "C:\\Users\\Crack-ALS\\Documents\\GitHub\\Proyectos\\Punto de venta\\Archivos\\archivo.txt";
+    private static final String NOMBRE_ARCHIVO = "C:\\Users\\JorgeLS\\Documents\\GitHub\\Proyectos\\Punto de venta\\Archivos\\ ' '" ;
+    private static final String nombre  =   "";
 
     /**
      * Creates new form Inventario
@@ -148,7 +150,8 @@ public class Inventario extends javax.swing.JFrame {
         });
 
         Modificar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/modificar.png"))); // NOI18N
-        Modificar.setText("Modificar");
+        Modificar.setText("Crear");
+        Modificar.setToolTipText("Crea un nuevo archivo");
         Modificar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 ModificarActionPerformed(evt);
@@ -183,14 +186,15 @@ public class Inventario extends javax.swing.JFrame {
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addComponent(textPiezas, javax.swing.GroupLayout.PREFERRED_SIZE, 148, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(Agregar))
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(Modificar)
+                                    .addComponent(Agregar)))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(24, 24, 24)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(Limpiar)
-                                    .addComponent(Modificar)
                                     .addComponent(jLabel5))))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
+                        .addGap(120, 120, 120)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(Buscar, javax.swing.GroupLayout.PREFERRED_SIZE, 592, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -198,20 +202,20 @@ public class Inventario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 81, Short.MAX_VALUE)
                                 .addGap(57, 57, 57))
                             .addComponent(textProducto))
                         .addGap(120, 120, 120)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 76, Short.MAX_VALUE)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 71, Short.MAX_VALUE)
                                 .addGap(67, 67, 67))
                             .addComponent(textPrecio))
                         .addGap(120, 120, 120)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(textExistencia)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 99, Short.MAX_VALUE)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                 .addGap(21, 21, 21)))
                         .addGap(83, 83, 83))))
             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -244,23 +248,26 @@ public class Inventario extends javax.swing.JFrame {
                     .addComponent(textPrecio, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(textExistencia))
                 .addGap(47, 47, 47)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addComponent(Guardar)
-                        .addGap(92, 92, 92)
-                        .addComponent(Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(83, 83, 83)
-                        .addComponent(Eliminar))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(30, 30, 30)
+                                .addComponent(Guardar)
+                                .addGap(92, 92, 92)
+                                .addComponent(Cargar, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(83, 83, 83)
+                                .addComponent(Eliminar)))
+                        .addGap(9, 9, 9))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(28, 28, 28)
                         .addComponent(Agregar)
-                        .addGap(91, 91, 91)
+                        .addGap(101, 101, 101)
+                        .addComponent(Modificar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(Limpiar)
-                        .addGap(78, 78, 78)
-                        .addComponent(Modificar)))
-                .addGap(9, 9, 9)
+                        .addGap(53, 53, 53)))
                 .addComponent(jLabel5)
                 .addContainerGap())
         );
@@ -346,12 +353,13 @@ public class Inventario extends javax.swing.JFrame {
         DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
 
         Object[] fila = new Object[4];
-
+        ArrayList<Object>   objects =   new ArrayList<>();
         fila[0] = textPiezas.getText();
         fila[1] = textProducto.getText();
         fila[2] = textPrecio.getText();
         fila[3] = textExistencia.getText();
         
+        objects.add(fila);
         modelo.addRow(fila);
         tablaProductos.setModel(modelo);
         limpiar();
@@ -367,7 +375,8 @@ public class Inventario extends javax.swing.JFrame {
     }//GEN-LAST:event_LimpiarActionPerformed
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
-        // TODO add your handling code here:
+        crearArchivoNuevo(NOMBRE_ARCHIVO);
+        
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void textPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPiezasActionPerformed

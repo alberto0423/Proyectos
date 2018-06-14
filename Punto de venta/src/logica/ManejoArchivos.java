@@ -8,6 +8,9 @@ package logica;
 import java.io.*;
 import javax.swing.JOptionPane;
 import static inventario.Inventario.*;
+import java.util.ArrayList;
+import javax.swing.JFileChooser;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -17,21 +20,32 @@ import javax.swing.table.DefaultTableModel;
 public class ManejoArchivos {
 
     private static final DefaultTableModel tableModel = (DefaultTableModel) tablaProductos.getModel();
+    private static String contenido[] = new String[4];
+    private static ArrayList<Object> list = new ArrayList<>();
 
     public static void crearArchivo(String nombreArchivos) {
         int recibido = JOptionPane.showConfirmDialog(null, "¿Desea crear un nuevo archivo?", "Crear Archivo", JOptionPane.OK_OPTION);
+        JFileChooser jfc = new JFileChooser();
+        File file = new File(nombreArchivos);
+        jfc.showSaveDialog(jfc);
+        jfc.addChoosableFileFilter(new FileNameExtensionFilter(nombreArchivos, ".txt"));
+        jfc.getSelectedFile();
 
         if (JOptionPane.OK_OPTION == recibido) {
-            File file = new File(nombreArchivos);
-            try {
-                PrintWriter printWriter = new PrintWriter(new FileWriter(nombreArchivos));
-                JOptionPane.showMessageDialog(null, "Se ha creado el archivo de manera exitosa");
-                printWriter.close();
+            if (file != null) {
+                try {
 
-            } catch (Exception e) {
-                e.printStackTrace();
-                JOptionPane.showMessageDialog(null, "Hubo un problema al crear el archivo");
+                    PrintWriter printWriter = new PrintWriter(new FileWriter(nombreArchivos + ".txt"));
+                    JOptionPane.showMessageDialog(null, "Se ha creado el archivo de manera exitosa");
+                    printWriter.close();
 
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Hubo un problema al crear el archivo");
+
+                }
+
+            } else {
             }
 
         }
@@ -42,7 +56,6 @@ public class ManejoArchivos {
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(file));
 
-            String contenido[] = new String[4];
             contenido[0] = (String) tableModel.getValueAt(0, 0);
             contenido[1] = (String) tableModel.getValueAt(0, 1);
             contenido[2] = (String) tableModel.getValueAt(0, 2);
@@ -54,6 +67,7 @@ public class ManejoArchivos {
 //            textExistencia.setText(contenido[3]);
 
             printWriter.println(contenido[0] + " " + contenido[1] + " " + contenido[2] + " " + contenido[3]);
+            tableModel.setValueAt(contenido, 0, 0);
             printWriter.println();
             printWriter.println("************");
             limpiar();
@@ -73,7 +87,8 @@ public class ManejoArchivos {
             lectura = bufferedReader.readLine();
             while (lectura != null) {
                 System.out.println("Lectura: " + lectura);
-                tableModel.setValueAt(lectura, 0, 0);
+                contenido = lectura.split(" ");
+                tableModel.addRow(contenido);
                 lectura = bufferedReader.readLine();
             }
             bufferedReader.close();
@@ -97,6 +112,18 @@ public class ManejoArchivos {
 //        } catch (Exception e) {
 //            e.printStackTrace();
 //        }
+    }
+    
+    public static void crearArchivoNuevo(String nombreArchivo){
+        JFileChooser    jfc =   new JFileChooser();
+        jfc.setFileFilter(new FileNameExtensionFilter("todos los archivos *.txt", "txt","EDU"));
+        int abrir   =   jfc.showDialog(null,"Abrir");
+        if (abrir == JFileChooser.APPROVE_OPTION) {
+            FileReader  reader  =   null;
+            BufferedReader  br  =   null;
+            
+        } else {
+        }
     }
 
     public static void limpiar() {
