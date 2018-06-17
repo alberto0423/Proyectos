@@ -22,8 +22,8 @@ import static logica.ManejoArchivos.*;
 public class Inventario extends javax.swing.JFrame {
 
     private List<Object> lista = new ArrayList();
-    private static final String NOMBRE_ARCHIVO = "C:\\Users\\JorgeLS\\Documents\\GitHub\\Proyectos\\Punto de venta\\Archivos\\ ' '" ;
-    private static final String nombre  =   "";
+    private static final String NOMBRE_ARCHIVO = "User.txt";
+    private static final String nombre = "";
 
     /**
      * Creates new form Inventario
@@ -295,7 +295,7 @@ public class Inventario extends javax.swing.JFrame {
         int r = jfc.showOpenDialog(null);
         jfc.showOpenDialog(null);
         leerArchivo(NOMBRE_ARCHIVO);
-          
+
 
     }//GEN-LAST:event_CargarActionPerformed
 
@@ -326,7 +326,7 @@ public class Inventario extends javax.swing.JFrame {
 //                ex.printStackTrace();
 //            }
 //        }
-                escribirArchivo(NOMBRE_ARCHIVO);
+        escribirArchivo(NOMBRE_ARCHIVO);
     }//GEN-LAST:event_GuardarActionPerformed
 
     private void EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_EliminarActionPerformed
@@ -352,14 +352,17 @@ public class Inventario extends javax.swing.JFrame {
     private void AgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AgregarActionPerformed
         DefaultTableModel modelo = (DefaultTableModel) tablaProductos.getModel();
 
-        Object[] fila = new Object[4];
-        ArrayList<Object>   objects =   new ArrayList<>();
-        fila[0] = textPiezas.getText();
-        fila[1] = textProducto.getText();
-        fila[2] = textPrecio.getText();
-        fila[3] = textExistencia.getText();
-        
-        objects.add(fila);
+        ArrayList<Object> objects = new ArrayList<>();
+        objects.add(0, textProducto.getText());
+        objects.add(1, textPiezas.getText());
+        objects.add(2, textPrecio.getText());
+        objects.add(3, textExistencia.getText());
+        Object[] fila = new Object[objects.size()];
+
+        for (int i = 0; i < objects.size(); i++) {
+            fila = objects.toArray(fila);
+        }
+
         modelo.addRow(fila);
         tablaProductos.setModel(modelo);
         limpiar();
@@ -376,7 +379,7 @@ public class Inventario extends javax.swing.JFrame {
 
     private void ModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ModificarActionPerformed
         crearArchivoNuevo(NOMBRE_ARCHIVO);
-        
+
     }//GEN-LAST:event_ModificarActionPerformed
 
     private void textPiezasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textPiezasActionPerformed

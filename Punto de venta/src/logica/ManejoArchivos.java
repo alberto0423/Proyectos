@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
 public class ManejoArchivos {
 
     private static final DefaultTableModel tableModel = (DefaultTableModel) tablaProductos.getModel();
-    private static String contenido[] = new String[4];
+    private static Object contenido[];
     private static ArrayList<Object> list = new ArrayList<>();
 
     public static void crearArchivo(String nombreArchivos) {
@@ -56,22 +56,33 @@ public class ManejoArchivos {
         try {
             PrintWriter printWriter = new PrintWriter(new FileWriter(file));
 
-            contenido[0] = (String) tableModel.getValueAt(0, 0);
-            contenido[1] = (String) tableModel.getValueAt(0, 1);
-            contenido[2] = (String) tableModel.getValueAt(0, 2);
-            contenido[3] = (String) tableModel.getValueAt(0, 3);
-//
+            list.add(0, textProducto.getText());
+            list.add(1, textPiezas.getText());
+            list.add(2, textPrecio.getText());
+            list.add(3, textExistencia.getText());
+
+            contenido = new Object[list.size()];
+
+            for (int i = 0; i < list.size(); i++) {
+                contenido = list.toArray(contenido);
+                printWriter.println(list.set(i, 0));
+                System.out.println("*****" + list.isEmpty());
+//             
+            }
+
+//            
 //            textPiezas.setText(contenido[0]);
 //            textProducto.setText(contenido[1]);
 //            textPrecio.setText(contenido[2]);
 //            textExistencia.setText(contenido[3]);
-
-            printWriter.println(contenido[0] + " " + contenido[1] + " " + contenido[2] + " " + contenido[3]);
-            tableModel.setValueAt(contenido, 0, 0);
+            //    printWriter.println(contenido[0] + " " + contenido[1] + " " + contenido[2] + " " + contenido[3]);
+            printWriter.println();
+         //   tableModel.setValueAt(contenido, 0, 0);
             printWriter.println();
             printWriter.println("************");
             limpiar();
             limpiarDatosTabla();
+
             printWriter.close();
 
         } catch (Exception e) {
@@ -113,15 +124,15 @@ public class ManejoArchivos {
 //            e.printStackTrace();
 //        }
     }
-    
-    public static void crearArchivoNuevo(String nombreArchivo){
-        JFileChooser    jfc =   new JFileChooser();
-        jfc.setFileFilter(new FileNameExtensionFilter("todos los archivos *.txt", "txt","EDU"));
-        int abrir   =   jfc.showDialog(null,"Abrir");
+
+    public static void crearArchivoNuevo(String nombreArchivo) {
+        JFileChooser jfc = new JFileChooser();
+        jfc.setFileFilter(new FileNameExtensionFilter("todos los archivos *.txt", "txt", "EDU"));
+        int abrir = jfc.showDialog(null, "Abrir");
         if (abrir == JFileChooser.APPROVE_OPTION) {
-            FileReader  reader  =   null;
-            BufferedReader  br  =   null;
-            
+            FileReader reader = null;
+            BufferedReader br = null;
+
         } else {
         }
     }
